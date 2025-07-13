@@ -1,6 +1,22 @@
-// common/build.gradle.kts
+plugins {
+    `java-library`
+    kotlin("jvm") version "1.9.24"
+}
 
-val mapstructVersion = "1.6.3"
+group = "com.mycompany"
+version = "1.0.0-SNAPSHOT"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+val mapstructVersion = "1.5.5.Final"
 
 dependencies {
     // Lombok
@@ -11,12 +27,17 @@ dependencies {
     api("org.mapstruct:mapstruct:$mapstructVersion")
     annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
 
-    // Jakarta Validation
-    api("org.springframework.boot:spring-boot-starter-validation")
+    // Jakarta Annotations & Jackson
+    api("jakarta.annotation:jakarta.annotation-api:2.1.1")
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
-    // --- 테스트(test)용 의존성 ---
+    // 이 모듈 자체를 테스트하기 위한 의존성
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter:1.0.17")
     testCompileOnly("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
-    testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter:1.0.17")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
