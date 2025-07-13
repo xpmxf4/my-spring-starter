@@ -42,10 +42,10 @@ your-main-project/
 // ... 기존 설정 ...
 
 // 아래 코드를 파일 하단에 추가합니다.
-includeBuild("my-spring-modules")
+includeBuild("my-spring-starter")
 ```
 
-> **💡 Tip:** `my-spring-modules`는 클론된 폴더의 이름입니다. 만약 다른 이름으로 클론했다면 해당 이름을 사용해야 합니다.
+> **💡 Tip:** `my-spring-starter`는 클론된 폴더의 이름입니다. 만약 다른 이름으로 클론했다면 해당 이름을 사용해야 합니다.
 
 ### 3. `build.gradle.kts`에 의존성 추가
 
